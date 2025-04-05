@@ -19,21 +19,46 @@ architecture Behavioral of tt_um_example is
 signal numb_a : unsigned(7 downto 0);
 signal numb_b : unsigned(7 downto 0);
 signal c : unsigned(7 downto 0);
-signal op :  unsigned(1 downto 0);
--- en till signal för opp
+signal op :  unsigned(2 downto 0);
+
+type rom is array (0 to 15) of std_logic_vector(3 downto 0);
+  constant mem : rom := ( -- Talet -> vart i topp
+    "0000",
+    "0010",
+    "0001",
+    "1101",
+    "0011",
+    "0100",
+    "0101",
+    "1001",
+    "1000",
+    "0111",
+    "1010",
+    "1111",
+    "0110",
+    "1100",
+    "1011",
+    "1110"
+  );
 begin
     numb_a <= "0000" & unsigned(ui_in(3 downto 0));
     numb_b <= "0000" & unsigned(ui_in(7 downto 4));
-    op <= unsigned(uio_in(1 downto 0));
+    op <= unsigned(uio_in(2 downto 0));
 
     process(op, numb_a, numb_b)
     begin
         case op is 
-            when "00" => c <= (numb_a + numb_b);
-            when "01" => c <= not ((not numb_a) + numb_b);
+            when "000" => c <= (numb_a + numb_b);
+            when "001" => c <= not ((not numb_a) + numb_b);
+            when "010" => c <= resize(numb_a * numb_b, 8);
+            when "011" => c <= (numb_a mod numb_b);
+            when "100" =>
+                if mem(to_integer(numb_a)) > mem(to_integer(numb_b)) then 
+                    c <= numb_a;
+                else 
+                    c <= numb_b;
+                end if;
             when others => c <= "00000000";
-            -- when "10" => c <= resize(numb_a * numb_b, 8);
-            -- when others => c <= (numb_a mod numb_b);
         end case;
     end process;
     
