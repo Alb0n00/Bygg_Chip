@@ -59,6 +59,7 @@ begin
                     numb_c <= numb_b;
                 end if;
             when "101" => numb_c <= unsigned(ui_in(7 downto 0)) + 13;
+            when "110" => numb_c <= unsigned(ui_in(7 downto 0)) - 13;
             when others => numb_c <= "00000000";
         end case;
     end process;
