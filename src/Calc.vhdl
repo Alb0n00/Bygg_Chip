@@ -2,7 +2,7 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.NUMERIC_STD.ALL;
 
-entity tt_um_example is
+entity tt_um_hot_chick is
     port (
         ui_in   : in  std_logic_vector(7 downto 0);
         uo_out  : out std_logic_vector(7 downto 0);
@@ -13,9 +13,9 @@ entity tt_um_example is
         clk     : in  std_logic;
         rst_n   : in  std_logic
     );
-end tt_um_example;
+end tt_um_hot_chick;
 
-architecture Behavioral of tt_um_example is
+architecture Behavioral of tt_um_hot_chick is
 signal numb_a : unsigned(7 downto 0);
 signal numb_b : unsigned(7 downto 0);
 signal numb_c : unsigned(7 downto 0);
