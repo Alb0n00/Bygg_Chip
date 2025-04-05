@@ -22,9 +22,9 @@ signal c : unsigned(7 downto 0);
 signal op :  unsigned(1 downto 0);
 -- en till signal för opp
 begin
-    numb_a <= ui_in(3 downto 0);
-    numb_b <= ui_in(7 downto 4);
-    op <= uio_in(1 downto 0);
+    numb_a <= unsigned(ui_in(3 downto 0));
+    numb_b <= unsigned(ui_in(7 downto 4));
+    op <= unsigned(uio_in(1 downto 0));
 
     process(op, numb_a, numb_b)
     begin
@@ -36,7 +36,7 @@ begin
         end case;
     end process;
     
-    uo_out <= c;
+    uo_out <= std_logic_vector(c);
     --uo_out <= std_logic_vector(unsigned(ui_in) + unsigned(uio_in));
     --uo_out <= not (ui_in and uio_in);
     uio_out <= "00000000";
