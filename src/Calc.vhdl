@@ -53,7 +53,7 @@ begin
             when "010" => numb_c <= resize(numb_a * numb_b, 8);
             when "011" => numb_c <= (numb_a mod numb_b);
             when "100" =>
-                if mem(to_integer(numb_a)) > mem(to_integer(numb_b)) then 
+                if mem(to_integer(numb_a)) < mem(to_integer(numb_b)) then 
                     numb_c <= numb_a;
                 else 
                     numb_c <= numb_b;

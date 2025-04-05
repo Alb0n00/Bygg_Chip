@@ -55,6 +55,7 @@ async def test_project(dut):
     dut.uio_in.value = 0b00000100
     await ClockCycles(dut.clk, 1)
     assert dut.uo_out.value == 0b00000000
+    
     dut.ui_in.value = 0b00001110
     dut.uio_in.value = 0b00000100
     await ClockCycles(dut.clk, 1)
