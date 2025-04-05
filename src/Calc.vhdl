@@ -22,8 +22,8 @@ signal c : unsigned(7 downto 0);
 signal op :  unsigned(1 downto 0);
 -- en till signal för opp
 begin
-    numb_a <= unsigned(ui_in(3 downto 0));
-    numb_b <= unsigned(ui_in(7 downto 4));
+    numb_a <= "0000" & unsigned(ui_in(3 downto 0));
+    numb_b <= "0000" & unsigned(ui_in(7 downto 4));
     op <= unsigned(uio_in(1 downto 0));
 
     process(op, numb_a, numb_b)
@@ -31,7 +31,7 @@ begin
         case op is 
             when "00" => c <= (numb_a + numb_b);
             when "01" => c <= (numb_a - numb_b);
-            when "10" => c <= (numb_a * numb_b);
+            when "10" => c <= resize(numb_a * numb_b, 8);
             when others => c <= (numb_a mod numb_b);
         end case;
     end process;
