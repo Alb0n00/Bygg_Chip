@@ -29,10 +29,10 @@ begin
     process(op, numb_a, numb_b)
     begin
         case op is 
-            when "00" => c <= "00000000" & (numb_a + numb_b);
-            when "01" => c <= "00000000" & (numb_a - numb_b);
-            when "10" => c <= "00000000" & (numb_a * numb_b);
-            when others => c <= "00000000" & (numb_a mod numb_b);
+            when "00" => c <= "00000000" or (numb_a + numb_b);
+            when "01" => c <= "00000000" or (numb_a - numb_b);
+            when "10" => c <= "00000000" or (numb_a * numb_b);
+            when others => c <= "00000000" or (numb_a mod numb_b);
         end case;
     end process;
     
