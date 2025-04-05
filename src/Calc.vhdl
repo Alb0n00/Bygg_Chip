@@ -18,7 +18,7 @@ end tt_um_example;
 architecture Behavioral of tt_um_example is
 signal numb_a : unsigned(7 downto 0);
 signal numb_b : unsigned(7 downto 0);
-signal c : unsigned(7 downto 0);
+signal numb_c : unsigned(7 downto 0);
 signal op :  unsigned(2 downto 0);
 
 type rom is array (0 to 15) of std_logic_vector(3 downto 0);
@@ -48,23 +48,22 @@ begin
     process(op, numb_a, numb_b)
     begin
         case op is 
-            when "000" => c <= (numb_a + numb_b);
-            when "001" => c <= not ((not numb_a) + numb_b);
-            when "010" => c <= resize(numb_a * numb_b, 8);
-            when "011" => c <= (numb_a mod numb_b);
+            when "000" => numb_c <= (numb_a + numb_b);
+            when "001" => numb_c <= not ((not numb_a) + numb_b);
+            when "010" => numb_c <= resize(numb_a * numb_b, 8);
+            when "011" => numb_c <= (numb_a mod numb_b);
             when "100" =>
                 if mem(to_integer(numb_a)) > mem(to_integer(numb_b)) then 
-                    c <= numb_a;
+                    numb_c <= numb_a;
                 else 
-                    c <= numb_b;
+                    numb_c <= numb_b;
                 end if;
-            when others => c <= "00000000";
+            when "101" => numb_c <= unsigned(ui_in(7 downto 0)) + 13;
+            when others => numb_c <= "00000000";
         end case;
     end process;
     
-    uo_out <= std_logic_vector(c);
-    --uo_out <= std_logic_vector(unsigned(ui_in) + unsigned(uio_in));
-    --uo_out <= not (ui_in and uio_in);
+    uo_out <= std_logic_vector(numb_c);
     uio_out <= "00000000";
     uio_oe <= "00000011";
 
