@@ -32,7 +32,7 @@ begin
             when "00" => c <= numb_a + numb_b;
             when "01" => c <= numb_a - numb_b;
             when "10" => c <= numb_a * numb_b;
-            when "11" => c <= numb_a mod numb_b;
+            when others => c <= numb_a mod numb_b;
         end case;
     end process;
     
