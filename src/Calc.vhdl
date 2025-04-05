@@ -30,9 +30,10 @@ begin
     begin
         case op is 
             when "00" => c <= (numb_a + numb_b);
-            when "01" => c <= (numb_a - numb_b);
-            when "10" => c <= resize(numb_a * numb_b, 8);
-            when others => c <= (numb_a mod numb_b);
+            when "01" => c <= not ((not numb_a) + numb_b);
+            when others => c <= "00000000";
+            -- when "10" => c <= resize(numb_a * numb_b, 8);
+            -- when others => c <= (numb_a mod numb_b);
         end case;
     end process;
     
